@@ -14,7 +14,7 @@ class BlogController extends Controller
      */
     protected $validateRules = [
         'title' => 'required|max:100|min:5',
-        'slug' => 'required|unique:blogs|max:100|min:5',
+        // 'slug' => 'required|unique:blogs|max:100|min:5',
         'username' => 'required|max:50|min:5',
         'content' => 'required|min:3'
     ];

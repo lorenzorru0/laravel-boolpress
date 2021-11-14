@@ -37268,7 +37268,20 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // let title = document.getElementById['title'].value;
+// let inputSlug = document.getElementById['slug'];
+// function slugify(string) {
+//     return string
+//         .toString()
+//         .trim()
+//         .toLowerCase()
+//         .replace(/\s+/g, "-")
+//         .replace(/[^\w\-]+/g, "")
+//         .replace(/\-\-+/g, "-")
+//         .replace(/^-+/, "")
+//         .replace(/-+$/, "");
+// }
+// inputSlug.value = slugify(title);
 
 /***/ }),
 
