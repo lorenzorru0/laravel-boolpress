@@ -13,10 +13,9 @@ class BlogController extends Controller
      * Validate rules
      */
     protected $validateRules = [
-        'title' => 'required|max:100|min:5',
-        // 'slug' => 'required|unique:blogs|max:100|min:5',
-        'username' => 'required|max:50|min:5',
-        'content' => 'required|min:3'
+        'title' => 'string|required|max:100|min:5',
+        'username' => 'string|required|max:50|min:5',
+        'content' => 'string|required|min:3'
     ];
 
     /**
@@ -55,12 +54,12 @@ class BlogController extends Controller
 
         $newBlog = new Blog();
         $newBlog->title = $data['title'];
-        $newBlog->slug = Str::of($newBlog['title'])->slug('-');
+        $newBlog->slug = $this->getSlug($newBlog['title']);
         $newBlog->username = $data['username'];
         $newBlog->content = $data['content'];
         $newBlog->save();
 
-        return redirect()->route('admin.blogs.show', $newBlog['id']);
+        return redirect()->route('admin.blogs.index', $newBlog['id'])->with('success', 'Il post è stato creato');
     }
 
     /**
@@ -96,15 +95,18 @@ class BlogController extends Controller
     {
         $request->validate($this->validateRules);
 
+        if ($blog->title != $request->title) {
+            $blog->slug = $this->getSlug($blog['title']);
+        }
+        
         $data = $request->all();
 
         $blog->title = $data['title'];
-        $blog->slug = Str::of($blog['title'])->slug('-');
         $blog->username = $data['username'];
         $blog->content = $data['content'];
         $blog->save();
 
-        return redirect()->route('admin.blogs.show', $blog['id']);
+        return redirect()->route('admin.blogs.index', $blog['id'])->with('success', "Il post numero {$blog->id} stato aggiornato");
     }
 
     /**
@@ -113,10 +115,35 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Blog $blog)
+    public function destroy(Request $request)
     {
+        $blog = Blog::find($request->deleteId);
+
         $blog->delete();
 
-        return redirect()->route('admin.blogs.index');
+        return redirect()->route('admin.blogs.index')->with('success', "Il post numero {$blog->id} è stato eliminato");
+    }
+
+    /**
+     * Return a rigth slug for a post
+     *
+     * @param  string  $slug
+     * @return string $slug
+     */
+    private function getSlug($title) 
+    {
+        $slug = Str::of($title)->slug('-');
+
+        $slugExist = Blog::where('slug', $slug)->first();
+
+        $count = 2;
+
+        while($slugExist) {
+            $slug = Str::of($title)->slug('-') . "-{$count}";
+            $slugExist = Blog::where('slug', $slug)->first();
+            $count++;
+        }
+
+        return $slug;
     }
 }

@@ -1,17 +1,10 @@
 require('./bootstrap');
 
-// let title = document.getElementById['title'].value;
-// let inputSlug = document.getElementById['slug'];
+const deleteButtons = document.querySelectorAll('.deleteButton');
+const valueId = document.getElementById('deleteId');
 
-// function slugify(string) {
-//     return string
-//         .toString()
-//         .trim()
-//         .toLowerCase()
-//         .replace(/\s+/g, "-")
-//         .replace(/[^\w\-]+/g, "")
-//         .replace(/\-\-+/g, "-")
-//         .replace(/^-+/, "")
-//         .replace(/-+$/, "");
-// }
-// inputSlug.value = slugify(title);
+deleteButtons.forEach((elm) => {
+    elm.addEventListener('click', function() {
+        valueId.value = this.getAttribute('data-id');
+    })
+});

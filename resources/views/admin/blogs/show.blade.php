@@ -27,7 +27,7 @@
                         @csrf
                         @method('DELETE')
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-danger mt-1" data-toggle="modal" data-target="#exampleModal">
+                        <button type="button" class="btn btn-danger mt-1 deleteButton" data-id='{{$blog['id']}}' data-toggle="modal" data-target="#exampleModal">
                         Delete
                         </button>
 
@@ -42,9 +42,10 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        Are you sure that you want delete "{{$blog['title']}}" post?
+                                        Are you sure that you want delete this post?
                                     </div>
                                     <div class="modal-footer">
+                                        <input type="hidden" name="deleteId" id="deleteId">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                         <button type="submit" class="btn btn-danger">Delete</button>
                                     </div>
