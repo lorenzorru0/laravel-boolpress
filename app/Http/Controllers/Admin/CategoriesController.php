@@ -6,9 +6,17 @@ use App\Blog;
 use App\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CategoriesController extends Controller
 {
+    /**
+     * Validate rules
+     */
+    protected $validateRules = [
+        'name' => 'string|required|max:50|min:2'
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +36,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categories.create');
     }
 
     /**
@@ -39,7 +47,16 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate($this->validateRules);
+
+        $data = $request->all();
+
+        $newCategory = new Category();
+        $newCategory->name = $data['name'];
+        $newCategory->slug = Str::of($newCategory['name'])->slug('-');
+        $newCategory->save();
+
+        return redirect()->route('admin.categories.index')->with('success', 'The category creation gone success');
     }
 
     /**
@@ -61,9 +78,9 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**
@@ -73,9 +90,20 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        if ( $category->name != $request->name ) {
+            $request->validate($this->validateRules);
+
+            $data = $request->all();
+    
+            $category = new Category();
+            $category->name = $data['name'];
+            $category->slug = Str::of($category['name'])->slug('-');
+            $category->save();
+        } 
+
+        return redirect()->route('admin.categories.index')->with('success', "The category number {$category->id} update gone success");
     }
 
     /**
@@ -84,8 +112,12 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $category = Category::find($request->deleteId);
+
+        $category->delete();
+
+        return redirect()->route('admin.categories.index')->with('success', "The category number {$category->id} has been deleted");
     }
 }

@@ -65,7 +65,7 @@ class BlogController extends Controller
         $newBlog->category_id = $data['category_id'];
         $newBlog->save();
 
-        return redirect()->route('admin.blogs.index', $newBlog['id'])->with('success', 'Il post è stato creato');
+        return redirect()->route('admin.blogs.index', $newBlog['id'])->with('success', 'The post creation gone success');
     }
 
     /**
@@ -115,7 +115,7 @@ class BlogController extends Controller
         $blog->category_id = $data['category_id'];
         $blog->save();
 
-        return redirect()->route('admin.blogs.index', $blog['id'])->with('success', "Il post numero {$blog->id} stato aggiornato");
+        return redirect()->route('admin.blogs.index', $blog['id'])->with('success', "The post number {$blog->id} has been updated");
     }
 
     /**
@@ -130,7 +130,7 @@ class BlogController extends Controller
 
         $blog->delete();
 
-        return redirect()->route('admin.blogs.index')->with('success', "Il post numero {$blog->id} è stato eliminato");
+        return redirect()->route('admin.blogs.index')->with('success', "The post number {$blog->id} has been deleted");
     }
 
     /**
