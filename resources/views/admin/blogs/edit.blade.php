@@ -45,6 +45,20 @@
                             @enderror
                         </div>
 
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <select name="category_id" id="category" class="form-control @error('title') is-invalid @enderror">
+                                <option value="">-- Select the category --</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{$category['id']}}" {{old('category') != null && old('category') == $category['id'] || $blog['category_id'] != null && $blog['category_id'] == $category['id'] ? 'selected' : ''}}>{{$category['name']}}</option>
+                                @endforeach
+                            </select>
+
+                            @error('category_id')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+
                         <button type="submit" class="btn btn-warning">Update</button>
                     </form>
                 </div>

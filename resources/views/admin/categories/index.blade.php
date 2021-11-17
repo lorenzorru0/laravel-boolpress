@@ -3,11 +3,11 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     {{ __('All blogs in the database') }}
-                    <a href="{{ route('admin.blogs.create') }}"><button type="button" class="btn btn-success">Create new post</button></a>
+                    <a href="{{ route('admin.categories.create') }}"><button type="button" class="btn btn-success">Create new category</button></a>
                 </div>
 
                 <div class="card-body">
@@ -27,26 +27,24 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Title</th>
+                                <th scope="col">Name</th>
                                 <th scope="col">Slug</th>
-                                <th scope="col">Username</th>
                                 <th scope="col">Created date</th>
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($blogs as $blog)
+                            @foreach ($categories as $category)
                                 <tr>
-                                    <td>{{$blog['id']}}</td>
-                                    <td>{{$blog['title']}}</td>
-                                    <td>{{$blog['slug']}}</td>
-                                    <td>{{$blog['username']}}</td>
-                                    <td>{{$blog['created_at']}}</td>
+                                    <td>{{$category['id']}}</td>
+                                    <td>{{$category['name']}}</td>
+                                    <td>{{$category['slug']}}</td>
+                                    <td>{{$category['created_at']}}</td>
                                     <td>
-                                        <a href="{{ route('admin.blogs.show', $blog['id']) }}"><button type="button" class="btn btn-primary">View</button></a> <br>
-                                        <a href="{{ route('admin.blogs.edit', $blog['id']) }}"><button type="button" class="btn btn-warning mt-1">Edit</button></a> <br>
+                                        <a href="{{ route('admin.categories.show', $category['id']) }}"><button type="button" class="btn btn-primary">View</button></a> 
+                                        <a href="{{ route('admin.categories.edit', $category['id']) }}"><button type="button" class="btn btn-warning">Edit</button></a> 
                                         <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-danger mt-1 deleteButton" data-id='{{$blog['id']}}' data-toggle="modal" data-target="#exampleModal">Delete</button>
+                                        <button type="button" class="btn btn-danger deleteButton" data-id='{{$category['id']}}' data-toggle="modal" data-target="#exampleModal">Delete</button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -63,16 +61,16 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Deleting category</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Deleting post</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('admin.blogs.destroy', 'id') }}" method="POST">
+            <form action="{{ route('admin.categories.destroy', 'id') }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <div class="modal-body">
-                    Are you sure that you want delete this category?
+                    Are you sure that you want delete this post?
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="deleteId" id="deleteId">

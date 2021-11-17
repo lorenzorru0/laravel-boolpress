@@ -19,7 +19,7 @@
 
                         <div class="form-group">
                             <label for="title">Title</label>
-                            <input type="text" class="form-control" name="title" id="title" placeholder="Write the post's title" value="{{ old('title') }}">
+                            <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title" placeholder="Write the post's title" value="{{ old('title') }}">
 
                             @error('title')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -28,7 +28,7 @@
 
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" class="form-control" name="username" id="username" placeholder="Write the post's username" value="{{ old('username') }}">
+                            <input type="text" class="form-control @error('title') is-invalid @enderror" name="username" id="username" placeholder="Write the post's username" value="{{ old('username') }}">
 
                             @error('username')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -37,9 +37,23 @@
 
                         <div class="form-group">
                             <label for="content">Content</label>
-                            <textarea class="form-control" name="content" id="content" cols="30" rows="10" placeholder="Write the post's content">{{ old('content') }}</textarea>
+                            <textarea class="form-control @error('title') is-invalid @enderror" name="content" id="content" cols="30" rows="10" placeholder="Write the post's content">{{ old('content') }}</textarea>
 
                             @error('content')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <select name="category_id" id="category" class="form-control @error('title') is-invalid @enderror">
+                                <option value="">-- Select the category --</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{$category['id']}}" {{old('category') && old('category') == $category['id'] ? selected : ''}}>{{$category['name']}}</option>
+                                @endforeach
+                            </select>
+
+                            @error('category')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
