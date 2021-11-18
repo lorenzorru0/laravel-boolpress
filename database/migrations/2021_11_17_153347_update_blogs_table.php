@@ -14,7 +14,7 @@ class UpdateBlogsTable extends Migration
     public function up()
     {
         Schema::table('blogs', function (Blueprint $table) {
-            $table->foreignId('category_id')->unique()->nullable()->constrained();
+            $table->foreignId('category_id')->unique()->nullable()->constrained()->onDelete('set null');
         });
     }
 

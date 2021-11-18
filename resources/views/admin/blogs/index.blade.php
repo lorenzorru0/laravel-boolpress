@@ -30,6 +30,7 @@
                                 <th scope="col">Title</th>
                                 <th scope="col">Slug</th>
                                 <th scope="col">Username</th>
+                                <th scope="col">Category</th>
                                 <th scope="col">Created date</th>
                                 <th scope="col">Actions</th>
                             </tr>
@@ -41,6 +42,7 @@
                                     <td>{{$blog['title']}}</td>
                                     <td>{{$blog['slug']}}</td>
                                     <td>{{$blog['username']}}</td>
+                                    <td>{{$blog['category'] != null ? $blog['category']['name'] : ''}}</td>
                                     <td>{{$blog['created_at']}}</td>
                                     <td>
                                         <a href="{{ route('admin.blogs.show', $blog['id']) }}"><button type="button" class="btn btn-primary">View</button></a> <br>
