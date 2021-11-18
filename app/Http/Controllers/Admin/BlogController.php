@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Blog;
 use App\Category;
+use App\Tag;
 
 class BlogController extends Controller
 {
@@ -17,7 +18,8 @@ class BlogController extends Controller
         'title' => 'string|required|max:100|min:5',
         'username' => 'string|required|max:50|min:5',
         'content' => 'string|required|min:3',
-        'category_id' => 'max:'
+        'category_id' => 'nullable|exists:categories,id',
+        'tags' => 'exists:tags,id'
     ];
 
     /**
@@ -40,8 +42,9 @@ class BlogController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $tags = Tag::all();
 
-        return view('admin.blogs.create', compact('categories'));
+        return view('admin.blogs.create', compact('categories', 'tags'));
     }
 
     /**
@@ -52,7 +55,6 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validateRules['category_id'] .= count(Category::all());
         $request->validate($this->validateRules);
 
         $data = $request->all();
@@ -64,6 +66,10 @@ class BlogController extends Controller
         $newBlog->content = $data['content'];
         $newBlog->category_id = $data['category_id'];
         $newBlog->save();
+
+        foreach($request->tags as $tag) {
+            $newBlog->tags()->attach($tag);
+        }
 
         return redirect()->route('admin.blogs.index', $newBlog['id'])->with('success', 'The post creation gone success');
     }
@@ -88,8 +94,9 @@ class BlogController extends Controller
     public function edit(Blog $blog)
     {
         $categories = Category::all();
+        $tags = Tag::all();
 
-        return view('admin.blogs.edit', compact('blog', 'categories'));
+        return view('admin.blogs.edit', compact('blog', 'categories', 'tags'));
     }
 
     /**
@@ -101,7 +108,6 @@ class BlogController extends Controller
      */
     public function update(Request $request, Blog $blog)
     {
-        $this->validateRules['category_id'] .= count(Category::all());
         $request->validate($this->validateRules);
 
         if ($blog->title != $request->title) {
@@ -114,6 +120,8 @@ class BlogController extends Controller
         $blog->content = $data['content'];
         $blog->category_id = $data['category_id'];
         $blog->save();
+
+        $blog->tags()->sync($request->tags);
 
         return redirect()->route('admin.blogs.index', $blog['id'])->with('success', "The post number {$blog->id} has been updated");
     }

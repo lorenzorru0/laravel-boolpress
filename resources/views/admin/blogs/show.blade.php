@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container show">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -22,7 +22,13 @@
                     <h4>User: {{$blog['username']}}</h4>
                     <h4>Created: {{$blog['created_at']}}</h4>
                     <p>Content: {{$blog['content']}}</p>
-                    <a href="{{ route('admin.blogs.edit', $blog['id']) }}"><button type="button" class="btn btn-warning mt-1">Edit</button></a>
+                    <div>
+                        <span>Tags:</span>
+                        @foreach ($blog['tags'] as $tag)
+                            <span class="badge badge-pill badge-primary">{{$tag['name']}}</span>
+                        @endforeach
+                    </div>
+                    <a href="{{ route('admin.blogs.edit', $blog['id']) }}"><button type="button" class="btn btn-warning mt-3">Edit</button></a>
                     <form action="{{ route('admin.blogs.destroy', $blog['id']) }}" method="POST">
                         @csrf
                         @method('DELETE')

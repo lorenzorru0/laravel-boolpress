@@ -28,7 +28,7 @@
 
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" class="form-control @error('title') is-invalid @enderror" name="username" id="username" placeholder="Write the post's username" value="{{ old('username') }}">
+                            <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" id="username" placeholder="Write the post's username" value="{{ old('username') }}">
 
                             @error('username')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -37,7 +37,7 @@
 
                         <div class="form-group">
                             <label for="content">Content</label>
-                            <textarea class="form-control @error('title') is-invalid @enderror" name="content" id="content" cols="30" rows="10" placeholder="Write the post's content">{{ old('content') }}</textarea>
+                            <textarea class="form-control @error('content') is-invalid @enderror" name="content" id="content" cols="30" rows="10" placeholder="Write the post's content">{{ old('content') }}</textarea>
 
                             @error('content')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -46,7 +46,7 @@
 
                         <div class="form-group">
                             <label for="category">Category</label>
-                            <select name="category_id" id="category" class="form-control @error('title') is-invalid @enderror">
+                            <select name="category_id" id="category" class="form-control @error('category') is-invalid @enderror">
                                 <option value="">-- Select the category --</option>
                                 @foreach ($categories as $category)
                                     <option value="{{$category['id']}}" {{old('category') && old('category') == $category['id'] ? selected : ''}}>{{$category['name']}}</option>
@@ -58,7 +58,22 @@
                             @enderror
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <div class="class-group">
+                            <p>Tags</p>
+                            @foreach ($tags as $tag)    
+                                <div class="custom-control custom-checkbox">
+                                    @if ($errors->any())
+                                        <input {{in_array($tag['id'], old('tags')) ? 'checked' : ''}} name="tags[]" value="{{$tag['id']}}" type="checkbox" class="custom-control-input" id="tag-{{$tag['id']}}">
+                                        <label class="custom-control-label" for="tag-{{$tag['id']}}">{{$tag['name']}}</label>
+                                    @else
+                                        <input name="tags[]" value="{{$tag['id']}}" type="checkbox" class="custom-control-input" id="tag-{{$tag['id']}}">
+                                        <label class="custom-control-label" for="tag-{{$tag['id']}}">{{$tag['name']}}</label>
+                                    @endif
+                                </div>
+                            @endforeach
+                        </div>
+
+                        <button type="submit" class="btn btn-primary mt-3">Create</button>
                     </form>
                 </div>
             </div>

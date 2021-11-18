@@ -50,7 +50,11 @@
                             <select name="category_id" id="category" class="form-control @error('title') is-invalid @enderror">
                                 <option value="">-- Select the category --</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{$category['id']}}" {{old('category') != null && old('category') == $category['id'] || $blog['category_id'] != null && $blog['category_id'] == $category['id'] ? 'selected' : ''}}>{{$category['name']}}</option>
+                                @if ($errors->any())
+                                    <option value="{{$category['id']}}" {{old('category') == $category['id'] ? 'selected' : ''}}>{{$category['name']}}</option>
+                                @else
+                                    <option value="{{$category['id']}}" {{$blog['category_id'] != null && $blog['category_id'] == $category['id'] ? 'selected' : ''}}>{{$category['name']}}</option>
+                                @endif
                                 @endforeach
                             </select>
 
@@ -59,7 +63,22 @@
                             @enderror
                         </div>
 
-                        <button type="submit" class="btn btn-warning">Update</button>
+                        <div class="class-group">
+                            <p>Tags</p>
+                            @foreach ($tags as $tag)    
+                                <div class="custom-control custom-checkbox">
+                                    @if ($errors->any())
+                                        <input {{in_array($tag['id'], old('tags')) ? 'checked' : ''}} name="tags[]" value="{{$tag['id']}}" type="checkbox" class="custom-control-input" id="tag-{{$tag['id']}}">
+                                        <label class="custom-control-label" for="tag-{{$tag['id']}}">{{$tag['name']}}</label>
+                                    @else
+                                        <input {{in_array($tag['id'], $blog['tags']) ? 'checked' : ''}} name="tags[]" value="{{$tag['id']}}" type="checkbox" class="custom-control-input" id="tag-{{$tag['id']}}">
+                                        <label class="custom-control-label" for="tag-{{$tag['id']}}">{{$tag['name']}}</label>
+                                    @endif
+                                </div>
+                            @endforeach
+                        </div>
+
+                        <button type="submit" class="btn btn-warning mt-3">Update</button>
                     </form>
                 </div>
             </div>

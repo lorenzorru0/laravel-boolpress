@@ -1,9 +1,18 @@
-.badge {
+.home .badge {
     font-size: 1.5rem;
+    padding: .625rem;
+}
+
+.show .badge {
+    font-size: 1rem;
     padding: .625rem;
 }
 
 .modal-title,
 .modal-body {
     color: #000;
+}
+
+.class-group p {
+    margin-bottom: 0.5rem;
 }
