@@ -67,9 +67,7 @@ class CategoriesController extends Controller
      */
     public function show(Category $category)
     {
-        $posts = Blog::where('category_id', $category->id);
-
-        return view('admin.categories.show', compact('category', 'posts'));
+        return view('admin.categories.show', compact('category'));
     }
 
     /**

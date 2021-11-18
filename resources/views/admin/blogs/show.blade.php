@@ -22,10 +22,14 @@
                     <h4>User: {{$blog['username']}}</h4>
                     <h4>Created: {{$blog['created_at']}}</h4>
                     <p>Content: {{$blog['content']}}</p>
+                    <span>Category:</span>
+                    @if ($blog['category'] != null)
+                        <a href="{{route('admin.categories.show', $blog['category']['id'])}}">{{$blog['category']['name']}}</a>
+                    @endif
                     <div>
                         <span>Tags:</span>
                         @foreach ($blog['tags'] as $tag)
-                            <span class="badge badge-pill badge-primary">{{$tag['name']}}</span>
+                            <span class="badge badge-pill badge-primary mt-1">{{$tag['name']}}</span>
                         @endforeach
                     </div>
                     <a href="{{ route('admin.blogs.edit', $blog['id']) }}"><button type="button" class="btn btn-warning mt-3">Edit</button></a>

@@ -10989,3 +10989,8 @@ a.text-dark:focus {
   min-height: calc(100vh - 22.075625rem);
 }
 
+.main_show_guest .badge {
+  font-size: 1rem;
+  padding: 0.625rem;
+}
+

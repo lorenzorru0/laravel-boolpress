@@ -3,4 +3,9 @@
 }
 .main_show_guest {
     min-height: calc(100vh - 22.075625rem);
+
+    .badge {
+        font-size: 1rem;
+        padding: .625rem;
+    }
 }

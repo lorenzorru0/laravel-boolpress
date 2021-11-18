@@ -20,6 +20,17 @@
                         <h2 class="card-title">{{$blog['title']}}</h2>
                         <div class="small text-muted">{{$blog['created_at']}} by {{$blog['username']}}</div>
                         <p class="card-text">{{$blog['content']}}</p>
+                        @if ($blog['category'] != null)
+                            <p>Category: {{$blog['category']['name']}}</p>
+                        @endif
+                        @if (count($blog['tags']) > 0)
+                            <div>
+                                <span>Tags:</span>
+                                @foreach ($blog['tags'] as $tag)
+                                    <span class="badge badge-pill badge-primary">{{$tag['name']}}</span>
+                                @endforeach
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
