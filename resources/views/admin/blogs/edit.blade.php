@@ -71,7 +71,7 @@
                                         <input {{in_array($tag['id'], old('tags')) ? 'checked' : ''}} name="tags[]" value="{{$tag['id']}}" type="checkbox" class="custom-control-input" id="tag-{{$tag['id']}}">
                                         <label class="custom-control-label" for="tag-{{$tag['id']}}">{{$tag['name']}}</label>
                                     @else
-                                        <input {{in_array($tag['id'], $blog['tags']) ? 'checked' : ''}} name="tags[]" value="{{$tag['id']}}" type="checkbox" class="custom-control-input" id="tag-{{$tag['id']}}">
+                                        <input {{$blog['tags']->contains($tag['id']) ? 'checked' : ''}} name="tags[]" value="{{$tag['id']}}" type="checkbox" class="custom-control-input" id="tag-{{$tag['id']}}">
                                         <label class="custom-control-label" for="tag-{{$tag['id']}}">{{$tag['name']}}</label>
                                     @endif
                                 </div>
