@@ -29,7 +29,7 @@
                     <div>
                         <span>Tags:</span>
                         @foreach ($blog['tags'] as $tag)
-                            <span class="badge badge-pill badge-primary mt-1">{{$tag['name']}}</span>
+                            <a href="{{route('admin.tags.show', $tag['id'])}}" class="badge badge-pill badge-primary mt-1">{{$tag['name']}}</a>
                         @endforeach
                     </div>
                     <a href="{{ route('admin.blogs.edit', $blog['id']) }}"><button type="button" class="btn btn-warning mt-3">Edit</button></a>
