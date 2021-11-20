@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Blog;
+use App\Category;
+use App\Tag;
 
 class PageController extends Controller
 {
@@ -21,8 +23,10 @@ class PageController extends Controller
     public function home()
     {
         $blogs = Blog::all();
+        $categories = Category::all();
+        $tags = Tag::all();
 
-        return view('guest.index', compact('blogs'));
+        return view('guest.index', compact('blogs', 'categories', 'tags'));
     }
 
     /**
@@ -35,5 +39,29 @@ class PageController extends Controller
         $blog = Blog::where('slug', $slug)->first();
 
         return view('guest.show', compact('blog'));
+    }
+
+    /**
+     * Show the single categories.
+     * 
+     * @param string $slug
+     */
+    public function showCategory($slug)
+    {
+        $category = Category::where('slug', $slug)->first();
+
+        return view('guest.show-category', compact('category'));
+    }
+
+    /**
+     * Show the single categories.
+     * 
+     * @param string $slug
+     */
+    public function showTag($slug)
+    {
+        $tag = Tag::where('slug', $slug)->first();
+
+        return view('guest.show-tag', compact('tag'));
     }
 }

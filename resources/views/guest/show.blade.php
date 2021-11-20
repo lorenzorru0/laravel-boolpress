@@ -21,13 +21,13 @@
                         <div class="small text-muted">{{$blog['created_at']}} by {{$blog['username']}}</div>
                         <p class="card-text">{{$blog['content']}}</p>
                         @if ($blog['category'] != null)
-                            <p>Category: {{$blog['category']['name']}}</p>
+                            <p>Category: <a href="{{route('blog.category.show', $blog['category']['slug'])}}">{{$blog['category']['name']}}</a></p>
                         @endif
                         @if (count($blog['tags']) > 0)
                             <div>
                                 <span>Tags:</span>
                                 @foreach ($blog['tags'] as $tag)
-                                    <span class="badge badge-pill badge-primary">{{$tag['name']}}</span>
+                                    <a href="{{route('blog.tag.show', $tag['slug'])}}" class="badge badge-pill badge-primary">{{$tag['name']}}</a>
                                 @endforeach
                             </div>
                         @endif
