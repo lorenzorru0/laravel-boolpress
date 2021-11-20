@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     {{ __('Show single blog\'s post') }}
-                    <a href="{{ route('admin.blogs.index') }}">All posts</a>
+                    <a href="{{ route('admin.tags.index') }}">All tags</a>
                 </div>
 
                 <div class="card-body">
@@ -17,22 +17,22 @@
                         </div>
                     @endif
 
-                    <h2>Name: {{$category['name']}}</h2>
-                    <p>Slug: {{$category['slug']}}</p>
+                    <h2>Name: {{$tag['name']}}</h2>
+                    <p>Slug: {{$tag['slug']}}</p>
                     
-                    @if (count($category['blogs']) > 0)
+                    @if (count($tag['blogs']) > 0)
                         <h4>Posts:</h4>
-                        @foreach ($category['blogs'] as $blog)
+                        @foreach ($tag['blogs'] as $blog)
                             <a href="{{route('admin.blogs.show', $blog['id'])}}" class="badge badge-secondary mt-2">{{$blog['title']}}</a> <br>
                         @endforeach
                     @endif
 
-                    <a href="{{ route('admin.categories.edit', $category['id']) }}"><button type="button" class="btn btn-warning mt-3">Edit</button></a>
-                    <form action="{{ route('admin.categories.destroy', $category['id']) }}" method="POST">
+                    <a href="{{ route('admin.tags.edit', $tag['id']) }}"><button type="button" class="btn btn-warning mt-3">Edit</button></a>
+                    <form action="{{ route('admin.tags.destroy', $tag['id']) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-danger mt-1 deleteButton" data-id='{{$category['id']}}' data-toggle="modal" data-target="#exampleModal">
+                        <button type="button" class="btn btn-danger mt-1 deleteButton" data-id='{{$tag['id']}}' data-toggle="modal" data-target="#exampleModal">
                         Delete
                         </button>
 
@@ -41,13 +41,13 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Deleting category</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Deleting tag</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        Are you sure that you want delete this category?
+                                        Are you sure that you want delete this tag?
                                     </div>
                                     <div class="modal-footer">
                                         <input type="hidden" name="deleteId" id="deleteId">

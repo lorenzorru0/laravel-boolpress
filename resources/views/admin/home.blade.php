@@ -14,8 +14,9 @@
                         </div>
                     @endif
 
-                    <a href="{{ route('admin.blogs.index') }}" class="badge badge-secondary">All blogs</a> <br/>
-                    <a href="{{ route('admin.categories.index') }}" class="badge badge-primary mt-2">All categories</a>
+                    <a href="{{ route('admin.blogs.index') }}" class="badge badge-secondary">All blogs</a> <br>
+                    <a href="{{ route('admin.categories.index') }}" class="badge badge-primary mt-2">All categories</a> <br>
+                    <a href="{{ route('admin.tags.index') }}" class="badge badge-secondary mt-2">All tags</a> <br/>
                 </div>
             </div>
         </div>

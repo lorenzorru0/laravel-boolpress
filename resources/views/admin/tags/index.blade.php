@@ -6,8 +6,8 @@
         <div class="col-md-10">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    {{ __('All categories in the database') }}
-                    <a href="{{ route('admin.categories.create') }}"><button type="button" class="btn btn-success">Create new category</button></a>
+                    {{ __('All tags in the database') }}
+                    <a href="{{ route('admin.tags.create') }}"><button type="button" class="btn btn-success">Create new tag</button></a>
                 </div>
 
                 <div class="card-body">
@@ -34,17 +34,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($categories as $category)
+                            @foreach ($tags as $tag)
                                 <tr>
-                                    <td>{{$category['id']}}</td>
-                                    <td>{{$category['name']}}</td>
-                                    <td>{{$category['slug']}}</td>
-                                    <td>{{$category['created_at']}}</td>
+                                    <td>{{$tag['id']}}</td>
+                                    <td>{{$tag['name']}}</td>
+                                    <td>{{$tag['slug']}}</td>
+                                    <td>{{$tag['created_at']}}</td>
                                     <td>
-                                        <a href="{{ route('admin.categories.show', $category['id']) }}"><button type="button" class="btn btn-primary">View</button></a> 
-                                        <a href="{{ route('admin.categories.edit', $category['id']) }}"><button type="button" class="btn btn-warning">Edit</button></a> 
+                                        <a href="{{ route('admin.tags.show', $tag['id']) }}"><button type="button" class="btn btn-primary">View</button></a> 
+                                        <a href="{{ route('admin.tags.edit', $tag['id']) }}"><button type="button" class="btn btn-warning">Edit</button></a> 
                                         <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-danger deleteButton" data-id='{{$category['id']}}' data-toggle="modal" data-target="#exampleModal">Delete</button>
+                                        <button type="button" class="btn btn-danger deleteButton" data-id='{{$tag['id']}}' data-toggle="modal" data-target="#exampleModal">Delete</button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -61,16 +61,16 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Deleting category</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Deleting tags</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('admin.categories.destroy', 'id') }}" method="POST">
+            <form action="{{ route('admin.tags.destroy', 'id') }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <div class="modal-body">
-                    Are you sure that you want delete this category?
+                    Are you sure that you want delete this tag?
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="deleteId" id="deleteId">
