@@ -64,4 +64,12 @@ class PageController extends Controller
 
         return view('guest.show-tag', compact('tag'));
     }
+
+    /**
+     * Show the posts with vue.
+     */
+    public function showApiFront()
+    {
+        return view('guest.front-api');
+    }
 }

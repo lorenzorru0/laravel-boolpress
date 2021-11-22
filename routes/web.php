@@ -19,6 +19,7 @@ Route::get('/blog/home', 'PageController@home')->name('blog.home');
 Route::get('/blog/show/{slug}', 'PageController@show')->name('blog.show');
 Route::get('/blog/show/category/{slug}', 'PageController@showCategory')->name('blog.category.show');
 Route::get('/blog/show/tag/{slug}', 'PageController@showTag')->name('blog.tag.show');
+Route::get('/Posts/apiFront', 'PageController@showApiFront')->name('api.postsShow');
 
 
 // Authentication routes

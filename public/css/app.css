@@ -10962,35 +10962,3 @@ a.text-dark:focus {
   }
 }
 
-.home .badge {
-  font-size: 1.5rem;
-  padding: 0.625rem;
-}
-
-.show .badge {
-  font-size: 1rem;
-  padding: 0.625rem;
-}
-
-.modal-title,
-.modal-body {
-  color: #000;
-}
-
-.class-group p {
-  margin-bottom: 0.5rem;
-}
-
-.main_guest {
-  min-height: calc(100vh - 23.075625rem);
-}
-
-.main_show_guest {
-  min-height: calc(100vh - 22.075625rem);
-}
-
-.main_show_guest .badge {
-  font-size: 1rem;
-  padding: 0.625rem;
-}
-
