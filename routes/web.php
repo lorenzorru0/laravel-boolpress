@@ -14,12 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 //  Public routes
-Route::get('/', 'PageController@index')->name('welcome');
-Route::get('/blog/home', 'PageController@home')->name('blog.home');
-Route::get('/blog/show/{slug}', 'PageController@show')->name('blog.show');
-Route::get('/blog/show/category/{slug}', 'PageController@showCategory')->name('blog.category.show');
-Route::get('/blog/show/tag/{slug}', 'PageController@showTag')->name('blog.tag.show');
-Route::get('/Posts/apiFront', 'PageController@showApiFront')->name('api.postsShow');
+// Route::get('/', 'PageController@index')->name('welcome');
+// Route::get('/blog/home', 'PageController@home')->name('blog.home');
+// Route::get('/blog/show/{slug}', 'PageController@show')->name('blog.show');
+// Route::get('/blog/show/category/{slug}', 'PageController@showCategory')->name('blog.category.show');
+// Route::get('/blog/show/tag/{slug}', 'PageController@showTag')->name('blog.tag.show');
+// Route::get('/Posts/apiFront', 'PageController@showApiFront')->name('api.postsShow');
 
 
 // Authentication routes
@@ -32,3 +32,5 @@ Route::middleware('auth')->namespace('Admin')->name('admin.')->prefix('admin')->
     Route::resource('categories', 'CategoriesController');
     Route::resource('tags', 'TagsController');
 });
+
+Route::get('/{any}', 'PageController@index')->where('any', '.*');

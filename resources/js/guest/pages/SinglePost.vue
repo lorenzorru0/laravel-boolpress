@@ -10,7 +10,7 @@
 import PostCard from './../components/PostCard.vue'; 
 
 	export default {
-		name: 'Posts',
+		name: 'SinglePost',
 		components: {
 			PostCard
 		},
