@@ -33,6 +33,6 @@
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="{{asset("js/guest/guest.js")}}"></script>
+        <script src="{{asset("js/guest.js")}}"></script>
     </body>
 </html>
